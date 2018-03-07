@@ -1,0 +1,21 @@
+5. training in the cloud copy
+5. training in the cloud copy/*
+data.*
+*.png
+*.jpg
+screenshots*
+*.pyc
+__pycache__/*
+data
+.DS_Store
+none
+*.json
+*.key
+*.zip
+*.csv
+*.gif
+5. training in the cloud copy/trajectory/env_vars.sh
+5. training in the cloud copy/trajectory/env_vars.sh
+5. training in the cloud copy/trajectory/train/model.py
+5. training in the cloud copy/*
+5. training in the cloud copy

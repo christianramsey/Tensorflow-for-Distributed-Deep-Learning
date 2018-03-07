@@ -1,0 +1,11 @@
+trainingInput:
+  scaleTier: STANDARD_1
+  hyperparameters:
+    goal: MINIMIZE
+    hyperparameterMetricTag: loss
+    maxTrials: 2
+    maxParallelTrials: 3
+    params:
+    - parameterName: feat_eng_cols
+      type: CATEGORICAL
+      categoricalValues: ["ON", "OFF"]  
