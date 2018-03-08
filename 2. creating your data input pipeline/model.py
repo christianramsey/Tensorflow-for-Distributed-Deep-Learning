@@ -3,7 +3,7 @@ import tensorflow as tf
 from tensorflow import feature_column
 from tensorflow.python.lib.io import file_io
 tf.logging.set_verbosity(tf.logging.INFO)
-from pprint import pprint 
+from pprint import pprint
 
 # DESCRIBE DATASET
 # define columns and field defaults
@@ -62,5 +62,5 @@ def my_input_fn(file_paths, perform_shuffle=True,
     batch_features, batch_labels = iterator.get_next()
     return batch_features, batch_labels
 
-from pprint import pprint
+
 pprint(my_input_fn(['data/test/trajectories.csv-00000-of-00104']))
