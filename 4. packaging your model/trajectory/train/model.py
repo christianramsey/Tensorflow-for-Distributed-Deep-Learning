@@ -21,11 +21,11 @@ lng      = tf.feature_column.numeric_column("Long")
 altitude = tf.feature_column.numeric_column("Altitude")
 
 # sparse feature_columns
-date_ = tf.feature_column.categorical_column_with_hash_bucket('Date_', 100)
-time_ = tf.feature_column.categorical_column_with_hash_bucket('Time_', 100)
-dt_ = tf.feature_column.categorical_column_with_hash_bucket('dt_', 100)
+date_ = tf.feature_column.categorical_column_with_hash_bucket('Date_', 10)
+time_ = tf.feature_column.categorical_column_with_hash_bucket('Time_', 10)
+dt_ = tf.feature_column.categorical_column_with_hash_bucket('dt_', 10)
 
-lat_long_buckets = list(np.linspace(-180.0, 180.0, num=30))
+lat_long_buckets = list(np.linspace(-180.0, 180.0, num=5))
 
 lat_buck  = tf.feature_column.bucketized_column(
     source_column = lat,
@@ -49,9 +49,10 @@ def my_input_fn(file_paths, epochs=10, perform_shuffle=True,  batch_size=32):
         d = dict(zip(feature_names, features)), label
         return d
     dataset = (tf.data.TextLineDataset(file_paths)  # Read text file
+                    .skip(1)
                     .map(decode_csv))  # Transform each elem by decode_csv
     if perform_shuffle:
-        dataset = dataset.shuffle(100)
+        dataset = dataset.shuffle(1000)
     dataset = dataset.batch(batch_size)
     dataset = dataset.repeat(epochs)
     iterator = dataset.make_one_shot_iterator()
@@ -68,21 +69,43 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
     # define classifier config
     classifier_config=tf.estimator.RunConfig(save_checkpoints_steps=100)
     
+    ago = tf.train.ProximalAdagradOptimizer(
+            learning_rate=0.00011,
+            l1_regularization_strength=0.00011,
+            l2_regularization_strength=0.00011
+            )
+
     # define classifier
     classifier = tf.estimator.DNNLinearCombinedClassifier(
         linear_feature_columns=all_feature_columns,
         dnn_feature_columns=real_feature_columns,
-        dnn_hidden_units = [90,40,12],
+        dnn_hidden_units = [10,5,12],
         n_classes=len(class_labels),
         label_vocabulary=class_labels,
         model_dir=outputdir,
         config=classifier_config, 
-        dnn_dropout=.6
-    )
+        dnn_dropout=.3,
+        linear_optimizer=ago
+        )
+
+    # # define classifier
+    # classifier = tf.estimator.DNNLinearCombinedClassifier(
+    #     linear_feature_columns=all_feature_columns,
+    #     dnn_feature_columns=real_feature_columns,
+    #     dnn_hidden_units = [90,40,12],
+    #     n_classes=len(class_labels),
+    #     label_vocabulary=class_labels,
+    #     model_dir=outputdir,
+    #     config=classifier_config, 
+    #     dnn_dropout=.6
+    # )
 
     # load training and eval files    
     traindata =   [file for file in file_io.get_matching_files(traindir + '/trajectories.csv*')]
     evaldata =    [file for file in file_io.get_matching_files(evaldir + '/trajectories.csv*')]
+    print(evaldir)
+    from pprint import pprint
+    pprint(evaldata)
 
     # define training and eval params
     train_input = lambda: my_input_fn(
@@ -94,14 +117,14 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
 
     eval_input = lambda: my_input_fn(
         evaldata,
-        batch_size=1,
+        batch_size=500,
         perform_shuffle=False,
-        epochs=1
+        epochs=None
     )
 
     # define training, eval spec for train and evaluate including
     train_spec = tf.estimator.TrainSpec(train_input, 
-                                        max_steps=600000
+                                        max_steps=2500
                                         )
     eval_spec = tf.estimator.EvalSpec(eval_input,
                                     name='trajectory-eval'

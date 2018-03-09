@@ -67,7 +67,13 @@ class_labels = ['bike', 'bus', 'car',
 def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs):
     # define classifier config
     classifier_config=tf.estimator.RunConfig(save_checkpoints_steps=100)
-    
+
+    ago = tf.train.ProximalAdagradOptimizer(
+            learning_rate=0.00011,
+            l1_regularization_strength=0.1,
+            l2_regularization_strength=0.1
+            )
+
     # define classifier
     classifier = tf.estimator.DNNLinearCombinedClassifier(
         linear_feature_columns=all_feature_columns,
@@ -77,14 +83,11 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
         label_vocabulary=class_labels,
         model_dir=outputdir,
         config=classifier_config, 
-        dnn_dropout=.6
+        dnn_dropout=.9,
+        dnn_activation_fn=tf.nn.selu,
+        linear_optimizer=ago
         )
     
-    tf.train.ProximalAdagradOptimizer(
-            learning_rate=0.1,
-            l1_regularization_strength=0.001,
-            l2_regularization_strength=0.001
-            )
 
     # load training and eval files    
     traindata =   [file for file in file_io.get_matching_files(traindir + '/trajectories.csv*')]

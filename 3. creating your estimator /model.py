@@ -80,8 +80,10 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
     )
 
     # load training and eval files    
-    traindata =   [file for file in file_io.get_matching_files(traindir + '/trajectories.csv*')]
-    evaldata =    [file for file in file_io.get_matching_files(evaldir + '/trajectories.csv*')]
+    traindata =   [file for file in file_io.get_matching_files(
+        traindir + '/trajectories.csv*')]
+    evaldata =    [file for file in file_io.get_matching_files(
+        evaldir + '/trajectories.csv*')]
 
     # define training and eval params
     train_input = lambda: my_input_fn(
@@ -104,4 +106,9 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
                                     name='trajectory-eval'
                                     )                                  
     # run training and evaluation
-    tf.estimator.train_and_evaluate(classifier, train_spec, eval_spec)
+    tf.estimator.train_and_evaluate(
+        classifier, train_spec, eval_spec)
+
+
+train_eval('gs://image_cnn/read/concat/df_100.csv', 
+    'gs://image_cnn/read/df_100.csv', 10, 'trajectories', 2, 'outputdir')
