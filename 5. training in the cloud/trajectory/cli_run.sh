@@ -11,5 +11,7 @@ gcloud ml-engine jobs submit training $JOB_NAME \
         --evaldir $EVALDIR \
         --bucket $BUCKET \
         --outputdir $OUTPUTDIR \
-        --batchsize 300 \
+        --batchsize 32 \
         --epochs 10 
+
+        
