@@ -11,5 +11,5 @@ gcloud ml-engine jobs submit training $JOB_NAME \
         --traindir $TRAINDIR \
         --evaldir $EVALDIR \
         --bucket $BUCKET \
-        --outputdir $OUTPUTDIR \
+        --outputdir $JOB_DIR \
         --epochs 1 

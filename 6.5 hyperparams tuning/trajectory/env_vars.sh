@@ -2,7 +2,6 @@ export TRAINER_PACKAGE_PATH="train"
 now=$(date +"%Y%m%d_%H%M%S")
 export JOB_NAME="trajectory_$now"
 export CONFIG="hptuning_config.yaml"
-export BATCHSIZE=
 export MAIN_TRAINER_MODULE="train.task"
 export JOB_DIR="gs://trajectory/hyper"
 export PACKAGE_STAGING_LOCATION="gs://trajectory/model"
