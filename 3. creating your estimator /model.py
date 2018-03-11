@@ -81,9 +81,9 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
 
     # load training and eval files    
     traindata =   [file for file in file_io.get_matching_files(
-        traindir + '/trajectories.csv*')]
+        traindir + '/trajectory.csv*')]
     evaldata =    [file for file in file_io.get_matching_files(
-        evaldir + '/trajectories.csv*')]
+        evaldir + '/trajectory.csv*')]
 
     # define training and eval params
     train_input = lambda: my_input_fn(
@@ -111,4 +111,4 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
 
 
 train_eval('gs://image_cnn/read/concat/df_100.csv', 
-    'gs://image_cnn/read/df_100.csv', 10, 'trajectories', 2, 'outputdir')
+    'gs://image_cnn/read/df_100.csv', 10, 'trajectory', 2, 'outputdir')

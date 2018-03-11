@@ -63,4 +63,4 @@ def my_input_fn(file_paths, perform_shuffle=True,
     return batch_features, batch_labels
 
 
-pprint(my_input_fn(['data/test/trajectories.csv-00000-of-00104']))
+pprint(my_input_fn(['data/test/trajectory.csv-00000-of-00104']))

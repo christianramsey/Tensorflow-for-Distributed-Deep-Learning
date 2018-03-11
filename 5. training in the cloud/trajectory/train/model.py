@@ -50,6 +50,7 @@ def my_input_fn(file_paths, epochs=10, perform_shuffle=False,  batch_size=32):
         return d
     dataset = tf.data.TextLineDataset(file_paths)
     # TODO: Add skip functionality here
+    dataset = dataset.skip(1)
     dataset = dataset.map(decode_csv) 
     if perform_shuffle:
         dataset = dataset.shuffle(100)
@@ -91,8 +92,8 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
     
 
     # load training and eval files    
-    traindata =   [file for file in file_io.get_matching_files(traindir + '/trajectories.csv*')]
-    evaldata =    [file for file in file_io.get_matching_files(evaldir + '/trajectories.csv*')]
+    traindata =   [file for file in file_io.get_matching_files(traindir + '/trajectory.csv*')]
+    evaldata =    [file for file in file_io.get_matching_files(evaldir + '/trajectory.csv*')]
 
     # define training and eval params
     train_input = lambda: my_input_fn(
@@ -111,7 +112,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
 
     # define training, eval spec for train and evaluate including
     train_spec = tf.estimator.TrainSpec(train_input, 
-                                        max_steps=600000
+                                        max_steps=3000
                                         )
     eval_spec = tf.estimator.EvalSpec(eval_input,
                                     name='trajectory-eval'
