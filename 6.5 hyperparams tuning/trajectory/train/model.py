@@ -100,7 +100,7 @@ def get_features(extras):
     return real_feature_columns, all_feature_columns
 
 # define input pipeline
-def my_input_fn(file_paths, epochs=10, perform_shuffle=True,  batch_size=32):
+def my_input_fn(file_paths, epochs=10, perform_shuffle=False,  batch_size=32):
     def decode_csv(line):
         parsed_line = tf.decode_csv(line, FIELD_DEFAULTS)
         label = tf.convert_to_tensor(parsed_line[-1:])
@@ -145,7 +145,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
         label_vocabulary=class_labels,
         model_dir=job_dir,
         config=classifier_config, 
-        dnn_dropout=.99,
+        dnn_dropout=kwargs['dropout'],
         dnn_optimizer=optimizer
         )
     
@@ -165,14 +165,14 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
 
     eval_input = lambda: my_input_fn(
         evaldata,
-        batch_size=1,
+        batch_size=batchsize,
         perform_shuffle=False,
-        epochs=1
+        epochs=None
     )
 
     # define training, eval spec for train and evaluate including
     train_spec = tf.estimator.TrainSpec(train_input, 
-                                        max_steps=2000
+                                        max_steps=5000
                                         )
     eval_spec = tf.estimator.EvalSpec(eval_input,
                                     name='trajectory-eval'

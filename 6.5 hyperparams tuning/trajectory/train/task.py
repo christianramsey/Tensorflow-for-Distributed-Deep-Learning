@@ -22,7 +22,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--batchsize',
         help='Batch size for training',
-        required=True,
+        required=False,
         type=int,
         default=256
     )         
@@ -57,7 +57,12 @@ if __name__ == '__main__':
         '--feat_eng_cols',
         help='adding extra features',
         required=False
-    )              
+    )  
+    parser.add_argument(
+        '--dropout',
+        help='dropout probability',
+        required=False
+    )               
         
     # parse args
     args = parser.parse_args()
