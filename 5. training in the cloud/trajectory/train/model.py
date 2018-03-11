@@ -103,7 +103,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
 
     eval_input = lambda: my_input_fn(
         evaldata,
-        batch_size=1,
+        batch_size=batchsize,
         perform_shuffle=False,
         epochs=None
     )
