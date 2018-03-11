@@ -49,7 +49,6 @@ def my_input_fn(file_paths, epochs=10, perform_shuffle=True,  batch_size=32):
         d = dict(zip(feature_names, features)), label
         return d
     dataset = (tf.data.TextLineDataset(file_paths)  # Read text file
-                    .skip(1)
                     .map(decode_csv))  # Transform each elem by decode_csv
     if perform_shuffle:
         dataset = dataset.shuffle(1000)
@@ -117,7 +116,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
 
     eval_input = lambda: my_input_fn(
         evaldata,
-        batch_size=500,
+        batch_size=2000,
         perform_shuffle=False,
         epochs=None
     )
