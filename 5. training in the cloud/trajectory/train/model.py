@@ -40,7 +40,7 @@ sparse_feature_columns  =  [date_, time_, dt_, lat_buck, lng_buck ]
 all_feature_columns = real_feature_columns + sparse_feature_columns
 
 # define input pipeline
-def my_input_fn(file_paths, epochs=10, perform_shuffle=True,  batch_size=32):
+def my_input_fn(file_paths, epochs=10, perform_shuffle=False,  batch_size=32):
     def decode_csv(line):
         parsed_line = tf.decode_csv(line, FIELD_DEFAULTS)
         label = tf.convert_to_tensor(parsed_line[-1:])
@@ -48,8 +48,9 @@ def my_input_fn(file_paths, epochs=10, perform_shuffle=True,  batch_size=32):
         features = parsed_line  # Everything (but last element) are the features
         d = dict(zip(feature_names, features)), label
         return d
-    dataset = (tf.data.TextLineDataset(file_paths)  # Read text file
-                    .map(decode_csv))  # Transform each elem by decode_csv
+    dataset = tf.data.TextLineDataset(file_paths)
+    # TODO: Add skip functionality here
+    dataset = dataset.map(decode_csv) 
     if perform_shuffle:
         dataset = dataset.shuffle(100)
     dataset = dataset.batch(batch_size)
