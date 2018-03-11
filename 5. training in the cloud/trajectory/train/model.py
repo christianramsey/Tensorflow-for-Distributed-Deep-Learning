@@ -105,7 +105,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
         evaldata,
         batch_size=1,
         perform_shuffle=False,
-        epochs=1
+        epochs=None
     )
 
     # define training, eval spec for train and evaluate including
