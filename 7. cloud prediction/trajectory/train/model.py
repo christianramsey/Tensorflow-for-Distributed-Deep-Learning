@@ -162,12 +162,10 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
         label_vocabulary=class_labels,
         model_dir=job_dir,
         config=classifier_config, 
-        dnn_dropout=kwargs['dropout'],
+        dnn_dropout=float(kwargs['dropout']),
         dnn_optimizer=optimizer
         )
     
-   
-
     # load training and eval files    
     traindata =   [file for file in file_io.get_matching_files(traindir + '/trajectories.csv*')]
     evaldata =    [file for file in file_io.get_matching_files(evaldir + '/trajectories.csv*')]
@@ -189,7 +187,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
 
     # define training, eval spec for train and evaluate including
     train_spec = tf.estimator.TrainSpec(train_input, 
-                                        max_steps=20000
+                                        max_steps=100000
                                         )
     
     exporter = tf.estimator.LatestExporter('exporter',serving_input_fn)                                    

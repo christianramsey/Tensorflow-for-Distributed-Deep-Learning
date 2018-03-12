@@ -7,7 +7,6 @@ gcloud ml-engine jobs submit training $JOB_NAME \
         --region $REGION \
         --config $CONFIG \
         --verbosity debug \
-        --scale-tier $SCALE_TIER \
         -- \
         --traindir $TRAINDIR \
         --evaldir $EVALDIR \
@@ -15,6 +14,6 @@ gcloud ml-engine jobs submit training $JOB_NAME \
         --outputdir $JOB_DIR \
         --dropout 0.73 \
         --batchsize 505 \
-        --epochs 1 \
+        --epochs 100 \
         --hidden_units '64,16,4' \
         --feat_eng_cols 'ON'
