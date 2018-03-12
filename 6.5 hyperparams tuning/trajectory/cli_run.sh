@@ -5,7 +5,7 @@ gcloud ml-engine jobs submit training $JOB_NAME \
         --job-dir $JOB_DIR \
         --runtime-version $RUNTIME_VERSION \
         --region $REGION \
-        --config $CONFIG \
+        --config $CONFIG \ #hyperparameter job spec
         --verbosity debug \
         -- \
         --traindir $TRAINDIR \
