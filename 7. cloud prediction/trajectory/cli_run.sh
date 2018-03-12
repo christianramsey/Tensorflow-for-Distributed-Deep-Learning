@@ -12,8 +12,8 @@ gcloud ml-engine jobs submit training $JOB_NAME \
         --traindir $TRAINDIR \
         --evaldir $EVALDIR \
         --bucket $BUCKET \
-        --outputdir $OUTPUTDIR \
-        --dropout 0.73
+        --outputdir $JOB_DIR \
+        --dropout 0.73 \
         --batchsize 505 \
         --epochs 1 \
         --hidden_units '64,16,4' \
