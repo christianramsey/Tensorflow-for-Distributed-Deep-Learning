@@ -13,7 +13,8 @@ gcloud ml-engine jobs submit training $JOB_NAME \
         --evaldir $EVALDIR \
         --bucket $BUCKET \
         --outputdir $OUTPUTDIR \
-        --batchsize 300 \
+        --dropout 0.73
+        --batchsize 505 \
         --epochs 1 \
-        --hidden_units '64,12' \
+        --hidden_units '64,16,4' \
         --feat_eng_cols 'ON'

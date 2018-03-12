@@ -162,7 +162,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
         label_vocabulary=class_labels,
         model_dir=job_dir,
         config=classifier_config, 
-        dnn_dropout=.99,
+        dnn_dropout=kwargs['dropout'],
         dnn_optimizer=optimizer
         )
     
@@ -182,14 +182,14 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
 
     eval_input = lambda: my_input_fn(
         evaldata,
-        batch_size=1,
+        batch_size=batchsize,
         perform_shuffle=False,
-        epochs=1
+        epochs=None
     )
 
     # define training, eval spec for train and evaluate including
     train_spec = tf.estimator.TrainSpec(train_input, 
-                                        max_steps=10000
+                                        max_steps=20000
                                         )
     
     exporter = tf.estimator.LatestExporter('exporter',serving_input_fn)                                    
