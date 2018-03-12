@@ -24,11 +24,11 @@ def get_features(extras):
     altitude = tf.feature_column.numeric_column("Altitude")
 
     # sparse feature_columns
-    date_ = tf.feature_column.categorical_column_with_hash_bucket('Date_', 100)
-    time_ = tf.feature_column.categorical_column_with_hash_bucket('Time_', 100)
-    dt_ = tf.feature_column.categorical_column_with_hash_bucket('dt_', 100)
+    date_ = tf.feature_column.categorical_column_with_hash_bucket('Date_', 150)
+    time_ = tf.feature_column.categorical_column_with_hash_bucket('Time_', 50)
+    dt_ = tf.feature_column.categorical_column_with_hash_bucket('dt_', 7500)
 
-    lat_long_buckets = list(np.linspace(-180.0, 180.0, num=30))
+    lat_long_buckets = list(np.linspace(-180.0, 180.0, num=200))
 
     lat_buck  = tf.feature_column.bucketized_column(
         source_column = lat,
@@ -40,38 +40,38 @@ def get_features(extras):
 
     #  hyperparams: adding features for testing in hyperparm
     crossed_lat_lon = tf.feature_column.crossed_column(
-        [lat_buck, lng_buck], 7000)
+        [lat_buck, lng_buck], 4000)
 
     lng_buck_embedding = tf.feature_column.embedding_column(
         categorical_column=lng_buck,
-        dimension=3)
+        dimension=8)
 
     lat_buck_embedding = tf.feature_column.embedding_column(
         categorical_column=lat_buck,
-        dimension=3)
+        dimension=8)
 
     crossed_ll_embedding = tf.feature_column.embedding_column(
         categorical_column=crossed_lat_lon,
         dimension=12)
 
     crossed_all = tf.feature_column.crossed_column(
-        ['Lat', 'Long', 'Date_', 'Time_', 'dt_'], 20000)
+        ['Lat', 'Long', 'Date_', 'Time_', 'dt_'], 10000)
 
     crossed_all_embedding = tf.feature_column.embedding_column(
         categorical_column=crossed_all,
-        dimension=89)
+        dimension=30)
 
     date_embedding = tf.feature_column.embedding_column(
         categorical_column=date_,
-        dimension=24)
+        dimension=40)
 
     time_embedding = tf.feature_column.embedding_column(
         categorical_column=time_,
-        dimension=16)
+        dimension=24)
 
     dt_embedding = tf.feature_column.embedding_column(
         categorical_column=dt_,
-        dimension=224)
+        dimension=100)
 
     real_feature_eng = [ lng_buck_embedding, lat_buck_embedding,
             crossed_ll_embedding, date_embedding, time_embedding,
