@@ -137,7 +137,8 @@ def serving_input_fn():
         key: tf.expand_dims(tensor, -1)
         for key, tensor in feature_placeholders.items()
     }
-    return tf.estimator.export.ServingInputReceiver(features, feature_placeholders)
+    return tf.estimator.export.ServingInputReceiver(features, 
+                                feature_placeholders)
 
 
                      
@@ -187,7 +188,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
 
     # define training, eval spec for train and evaluate including
     train_spec = tf.estimator.TrainSpec(train_input, 
-                                        max_steps=1000100
+                                        max_steps=1003100
                                         )
     
     exporter = tf.estimator.LatestExporter('exporter',serving_input_fn)                                    

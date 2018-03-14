@@ -1,1 +1,5 @@
-gcloud ml-engine local predict --model-dir none/export/exporter/1519078397 --json-instances batch_predict.json
+gcloud ml-engine local predict --model-dir 
+    exporter/1520959794 --json-instances batch_predict.json
+
+
+    
