@@ -2,7 +2,7 @@ requestDict = {
       'instances': 
             [
                   {
-                        "Lat": 37.750179, "Long": -122.421427, "Altitude": 33.0, "Date_": "7/5/17", "Time_": "23:37:25", "dt_": "7/4/17 23:37"
+                        "Lat": 37.750179, "Long": -122.421427, "Altitude": 33.0, "Date_": "7/5/17", "Time_": "23:37:25", "dt_": "7/4/17 23:37" #bike
                   }
             ]     
 }
@@ -18,7 +18,7 @@ from googleapiclient import discovery
 from googleapiclient import errors
 
 # Store your full project ID in a variable in the format the API needs.
-projectID = 'sandboai-184920'
+projectID = 'deeplearnhf'
 
 # Get application default credentials (possible only if the gcloud tool is
 #  configured on your machine).
@@ -29,7 +29,7 @@ mlapi = discovery.build('ml', 'v1', credentials=credentials, discoveryServiceUrl
 
 
 # Create a request to call projects.models.create.
-parent = 'projects/%s/models/%s/versions/%s' % (projectID, 'trajectory', 'v2')
+parent = 'projects/%s/models/%s/versions/%s' % (projectID, 'trajectory', 'v1')
 request = mlapi.projects().predict(
               name=parent, body=requestDict).execute()
 
