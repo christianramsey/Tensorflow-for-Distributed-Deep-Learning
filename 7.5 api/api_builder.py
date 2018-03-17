@@ -1,12 +1,4 @@
-requestDict = {
-      'instances': 
-            [
-                  {
-                        "Lat": 37.750179, "Long": -122.421427, "Altitude": 33.0, "Date_": "7/5/17", "Time_": "23:37:25", "dt_": "7/4/17 23:37" #bike
-                  }
-            ]     
-}
-
+import data_dictionary # data to pass through
 import json
 from oauth2client.client import GoogleCredentials
 from googleapiclient import discovery
@@ -29,7 +21,7 @@ mlapi = discovery.build('ml', 'v1', credentials=credentials, discoveryServiceUrl
 
 
 # Create a request to call projects.models.create.
-parent = 'projects/%s/models/%s/versions/%s' % (projectID, 'trajectory', 'v2')
+parent = 'projects/%s/models/%s/versions/%s' % (projectID, 'trajectory', 'v1')
 request = mlapi.projects().predict(
               name=parent, body=requestDict).execute()
 
