@@ -29,7 +29,7 @@ mlapi = discovery.build('ml', 'v1', credentials=credentials, discoveryServiceUrl
 
 
 # Create a request to call projects.models.create.
-parent = 'projects/%s/models/%s/versions/%s' % (projectID, 'trajectory', 'v1')
+parent = 'projects/%s/models/%s/versions/%s' % (projectID, 'trajectory', 'v2')
 request = mlapi.projects().predict(
               name=parent, body=requestDict).execute()
 
