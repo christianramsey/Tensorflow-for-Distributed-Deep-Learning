@@ -52,8 +52,9 @@ def my_input_fn(file_paths, perform_shuffle=True,  batch_size=32):
     dataset = (tf.data.TextLineDataset(file_paths)  # Read text file
                     .map(decode_csv))  # Transform each elem by decode_csv
     if perform_shuffle:
-        dataset = dataset.shuffle()
+        dataset = dataset.shuffle(256)
     dataset = dataset.batch(batch_size)
+    
     iterator = dataset.make_one_shot_iterator()
     batch_features, batch_labels = iterator.get_next()
     return batch_features, batch_labels
@@ -75,6 +76,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
         dnn_hidden_units = [90,40,12],
         n_classes=len(class_labels),
         label_vocabulary=class_labels,
+        dnn_dropout=.8,
         model_dir=outputdir,
         config=classifier_config
     )
@@ -89,7 +91,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
     train_input = lambda: my_input_fn(
             traindata,
             batch_size=batchsize,
-            perform_shuffle=False
+            perform_shuffle=True
         )
 
     eval_input = lambda: my_input_fn(
@@ -100,7 +102,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
 
     # define training, eval spec for train and evaluate including
     train_spec = tf.estimator.TrainSpec(train_input, 
-                                        max_steps=300000
+                                        max_steps=30000
                                         )
     eval_spec = tf.estimator.EvalSpec(eval_input,
                                     name='trajectory-eval'
@@ -110,5 +112,5 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
         classifier, train_spec, eval_spec)
 
 
-train_eval('gs://image_cnn/read/concat/df_100.csv', 
-    'gs://image_cnn/read/df_100.csv', 10, 'trajectory', 2, 'outputdir')
+train_eval('../data/train', 
+    '../data/test', 10, 'trajectory', 2, 'outputdir')
