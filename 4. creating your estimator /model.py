@@ -5,6 +5,7 @@ from tensorflow.python.lib.io import file_io
 tf.logging.set_verbosity(tf.logging.INFO)
 from pprint import pprint 
 
+
 # DESCRIBE DATASET
 # define columns and field defaults
 COLUMNS        = ["Lat", "Long", "Altitude","Date_",
@@ -66,7 +67,7 @@ class_labels = ['bike', 'bus', 'car',
                 'plane', 'subway', 'taxi', 
                 'train', 'walk']
                      
-def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs):
+def train_eval(traindir, evaldir, batchsize, epochs, outputdir, **kwargs):
     # define classifier config
     classifier_config=tf.estimator.RunConfig(save_checkpoints_steps=100)
     
@@ -77,7 +78,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
         dnn_hidden_units = [90,40,12],
         n_classes=len(class_labels),
         label_vocabulary=class_labels,
-        dnn_dropout=.8,
+        dnn_dropout=.2,
         model_dir=outputdir,
         config=classifier_config
     )
@@ -98,7 +99,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
     eval_input = lambda: my_input_fn(
         evaldata,
         batch_size=99999999,
-        perform_shuffle=True
+        perform_shuffle=False
     )
 
     # define training, eval spec for train and evaluate including
@@ -113,5 +114,5 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
         classifier, train_spec, eval_spec)
 
 
-train_eval('../data/train', 
-    '../data/test', 10, 'trajectory', 2, 'outputdir')
+train_eval(traindir='../data/train', 
+    evaldir='../data/test', batchsize=10, epochs=2, outputdir='outputdir')
