@@ -4,6 +4,9 @@ from tensorflow import feature_column
 from tensorflow.python.lib.io import file_io
 tf.logging.set_verbosity(tf.logging.INFO)
 from pprint import pprint 
+from tensorflow.python import debug as tf_debug
+hook = tf_debug.TensorBoardDebugHook("PA-M-CRAMSEY:8889")
+
 
 
 # DESCRIBE DATASET
@@ -104,7 +107,8 @@ def train_eval(traindir, evaldir, batchsize, epochs, outputdir, **kwargs):
 
     # define training, eval spec for train and evaluate including
     train_spec = tf.estimator.TrainSpec(train_input, 
-                                        max_steps=10000
+                                        max_steps=10000,
+                                        hooks = [hook]
                                         )
     eval_spec = tf.estimator.EvalSpec(eval_input,
                                     name='trajectory-eval'
