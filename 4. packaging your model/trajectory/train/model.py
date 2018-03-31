@@ -90,9 +90,6 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
     # load training and eval files    
     traindata =   [file for file in file_io.get_matching_files(traindir + '/trajectories.csv*')]
     evaldata =    [file for file in file_io.get_matching_files(evaldir + '/trajectories.csv*')]
-    print(evaldir)
-    from pprint import pprint
-    pprint(evaldata)
 
     # define training and eval params
     train_input = lambda: my_input_fn(
