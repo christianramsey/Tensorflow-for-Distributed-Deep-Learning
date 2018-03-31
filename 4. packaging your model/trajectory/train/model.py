@@ -78,26 +78,14 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
     classifier = tf.estimator.DNNLinearCombinedClassifier(
         linear_feature_columns=all_feature_columns,
         dnn_feature_columns=real_feature_columns,
-        dnn_hidden_units = [10,5,12],
+        dnn_hidden_units = [80,40,20],
         n_classes=len(class_labels),
         label_vocabulary=class_labels,
         model_dir=outputdir,
         config=classifier_config, 
         dnn_dropout=.3,
-        linear_optimizer=ago
+        # linear_optimizer=ago
         )
-
-    # # define classifier
-    # classifier = tf.estimator.DNNLinearCombinedClassifier(
-    #     linear_feature_columns=all_feature_columns,
-    #     dnn_feature_columns=real_feature_columns,
-    #     dnn_hidden_units = [90,40,12],
-    #     n_classes=len(class_labels),
-    #     label_vocabulary=class_labels,
-    #     model_dir=outputdir,
-    #     config=classifier_config, 
-    #     dnn_dropout=.6
-    # )
 
     # load training and eval files    
     traindata =   [file for file in file_io.get_matching_files(traindir + '/trajectories.csv*')]
@@ -123,7 +111,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
 
     # define training, eval spec for train and evaluate including
     train_spec = tf.estimator.TrainSpec(train_input, 
-                                        max_steps=2500
+                                        max_steps=12500
                                         )
     eval_spec = tf.estimator.EvalSpec(eval_input,
                                     name='trajectory-eval'
