@@ -51,7 +51,7 @@ def my_input_fn(file_paths, epochs=10, perform_shuffle=True,  batch_size=32):
     dataset = (tf.data.TextLineDataset(file_paths)  # Read text file
                     .map(decode_csv))  # Transform each elem by decode_csv
     if perform_shuffle:
-        dataset = dataset.shuffle(1000)
+        dataset = dataset.shuffle(50)
     dataset = dataset.batch(batch_size)
     dataset = dataset.repeat(epochs)
     iterator = dataset.make_one_shot_iterator()
