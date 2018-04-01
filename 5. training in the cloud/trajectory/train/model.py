@@ -30,7 +30,7 @@ lat_long_buckets = list(np.linspace(-180.0, 180.0, num=30))
 lat_buck  = tf.feature_column.bucketized_column(
     source_column = lat,
     boundaries = lat_long_buckets )
-
+    
 lng_buck = tf.feature_column.bucketized_column(
     source_column = lng,
     boundaries = lat_long_buckets)
@@ -67,6 +67,7 @@ class_labels = ['bike', 'bus', 'car',
                 'train', 'walk']
                      
 def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs):
+    
     # define classifier config
     classifier_config=tf.estimator.RunConfig(save_checkpoints_steps=100)
 
@@ -89,7 +90,6 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
         dnn_activation_fn=tf.nn.selu,
         linear_optimizer=ago
         )
-    
 
     # load training and eval files    
     traindata =   [file for file in file_io.get_matching_files(traindir + '/trajectories.csv*')]
