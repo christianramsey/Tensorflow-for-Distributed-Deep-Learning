@@ -1,3 +1,4 @@
+
 export TRAINER_PACKAGE_PATH="train"
 now=$(date +"%Y%m%d_%H%M%S")
 export JOB_NAME="trajectory_$now"
