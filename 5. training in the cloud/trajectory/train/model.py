@@ -119,4 +119,3 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
                                     )                                  
     # run training and evaluation
     tf.estimator.train_and_evaluate(classifier, train_spec, eval_spec)
-
