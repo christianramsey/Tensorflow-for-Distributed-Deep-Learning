@@ -71,7 +71,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
     classifier_config=tf.estimator.RunConfig(save_checkpoints_steps=100)
 
     ago = tf.train.ProximalAdagradOptimizer(
-            learning_rate=0.00011,
+            learning_rate=0.01,
             l1_regularization_strength=0.1,
             l2_regularization_strength=0.1
             )
@@ -85,7 +85,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
         label_vocabulary=class_labels,
         model_dir=outputdir,
         config=classifier_config, 
-        dnn_dropout=.9,
+        dnn_dropout=.1,
         dnn_activation_fn=tf.nn.selu,
         linear_optimizer=ago
         )
@@ -112,7 +112,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, **kwargs
 
     # define training, eval spec for train and evaluate including
     train_spec = tf.estimator.TrainSpec(train_input, 
-                                        max_steps=3000
+                                        max_steps=20000
                                         )
     eval_spec = tf.estimator.EvalSpec(eval_input,
                                     name='trajectory-eval'
