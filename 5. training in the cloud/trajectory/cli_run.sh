@@ -4,7 +4,7 @@ gcloud ml-engine jobs submit training $JOB_NAME \
         --job-dir $JOB_DIR \
         --runtime-version $RUNTIME_VERSION \
         --region $REGION \
-        --config config_complex.yaml \
+        --config config.yaml \
         --verbosity debug \
         -- \
         --traindir $TRAINDIR \
