@@ -57,7 +57,13 @@ if __name__ == '__main__':
         '--embedding',
         help='Output dir for training/eval',
         required=False
-    )              
+    )
+    parser.add_argument(
+        '--learn_rate',
+        help='Learning rate',
+        required=False
+    )    
+                 
         
     # parse args
     args = parser.parse_args()

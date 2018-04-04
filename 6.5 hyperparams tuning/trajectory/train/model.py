@@ -128,11 +128,12 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
     # define classifier config
     classifier_config=tf.estimator.RunConfig(save_checkpoints_steps=10)
     
+    learn_rate = float(learn_rate)
     hidden_units = hidden_units.split(',')
     real_feature_columns, all_feature_columns = get_features(feat_eng_cols)
 
     optimizer = tf.train.ProximalAdagradOptimizer(
-            learning_rate=0.01,
+            learning_rate=float(kwargs['learn_rate']),
             l1_regularization_strength=0.1,
             l2_regularization_strength=0.01
             )

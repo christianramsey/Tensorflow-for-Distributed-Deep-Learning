@@ -66,10 +66,10 @@ class_labels = ['bike', 'bus', 'car',
                 'plane', 'subway', 'taxi', 
                 'train', 'walk']
                      
-def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_units, embedding, job_dir, **kwargs):
+def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_units, embedding, job_dir, learn_rate, **kwargs):
     # define classifier config
     classifier_config=tf.estimator.RunConfig(save_checkpoints_steps=10)
-    
+    learn_rate = float(learn_rate)
     hidden_units = hidden_units.split(',')
     
     # define classifier
@@ -87,7 +87,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
         )
     
     tf.train.ProximalAdagradOptimizer(
-            learning_rate=0.1,
+            learning_rate=learn_rate,
             l1_regularization_strength=0.001,
             l2_regularization_strength=0.001
             )
@@ -113,7 +113,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
 
     # define training, eval spec for train and evaluate including
     train_spec = tf.estimator.TrainSpec(train_input, 
-                                        max_steps=600000
+                                        max_steps=100000
                                         )
     eval_spec = tf.estimator.EvalSpec(eval_input,
                                     name='trajectory-eval'
