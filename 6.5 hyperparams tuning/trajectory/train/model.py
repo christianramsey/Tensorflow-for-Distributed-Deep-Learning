@@ -128,7 +128,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
     # define classifier config
     classifier_config=tf.estimator.RunConfig(save_checkpoints_steps=10)
     
-    learn_rate = float(learn_rate)
+    # learn_rate = float(learn_rate)
     hidden_units = hidden_units.split(',')
     real_feature_columns, all_feature_columns = get_features(feat_eng_cols)
 
