@@ -50,7 +50,7 @@ if __name__ == '__main__':
     )   
     parser.add_argument(
         '--hidden_units',
-        help='Output dir for training/eval',
+        help='hidden unit string for hyperparams',
         required=False
     )
     parser.add_argument(
