@@ -1,186 +1,105 @@
-trainingInput:
-  args:
-  - --traindir
-  - gs://trajectory/data/train
-  - --evaldir
-  - gs://trajectory/data/test  - --bucket
-  - trajectory
-  - --outputdir
-  - gs://trajectory/hyper
-  - --epochs
-  - '1'
-  hyperparameters:
-    enableTrialEarlyStopping: true
-    goal: MAXIMIZE
-    hyperparameterMetricTag: accuracy
-    maxParallelTrials: 3
-    maxTrials: 15
-    params:
-    - categoricalValues:
-      - 'ON'
-      - 'OFF'
-      parameterName: feat_eng_cols
-      type: CATEGORICAL
-    - maxValue: 512.0
-      minValue: 16.0
-      parameterName: batchsize
-      scaleType: UNIT_LINEAR_SCALE
-      type: INTEGER
-    - maxValue: 0.9
-      minValue: 0.2
-      parameterName: dropout
-      scaleType: UNIT_LINEAR_SCALE
-      type: DOUBLE
-    - categoricalValues:
-      - 64,16
-      - 64,16,4
-      - 60, 10
-      parameterName: hidden_units
-      type: CATEGORICAL
-  jobDir: gs://trajectory/hyper
-  packageUris:
-  - gs://trajectory/hyper/packages/9bb970e9c360846ae33f73b840d4c793a84f03d677227c076ba9326f67b4ead7/train-0.0.0.tar.gz
-  pythonModule: train.task
-  region: us-central1
-  runtimeVersion: '1.4'
-  scaleTier: BASIC_GPU
 trainingOutput:
-  completedTrialCount: '15'
-  consumedMLUnits: 7.37
-  isHyperparameterTuningJob: true
-  trials:
-  - finalMetric:
-      objectiveValue: 0.582464
-      trainingStep: '171'
-    hyperparameters:
-      batchsize: '505'
-      dropout: '0.73461347404720323'
-      feat_eng_cols: 'ON'
-      hidden_units: 64,16,4
-    trialId: '1'
-  - finalMetric:
-      objectiveValue: 0.580537
-      trainingStep: '169'
-    hyperparameters:
-      batchsize: '511'
-      dropout: '0.70661131101928'
-      feat_eng_cols: 'ON'
-      hidden_units: 60, 10
-    trialId: '12'
-  - finalMetric:
-      objectiveValue: 0.575957
-      trainingStep: '170'
-    hyperparameters:
-      batchsize: '509'
-      dropout: '0.77116780485605863'
-      feat_eng_cols: 'ON'
-      hidden_units: 64,16,4
-    trialId: '14'
-  - finalMetric:
-      objectiveValue: 0.567705
-      trainingStep: '170'
-    hyperparameters:
-      batchsize: '510'
-      dropout: '0.88229435571201642'
-      feat_eng_cols: 'ON'
-      hidden_units: 64,16
-    trialId: '13'
-  - finalMetric:
-      objectiveValue: 0.566836
-      trainingStep: '173'
-    hyperparameters:
-      batchsize: '500'
-      dropout: '0.48708401946441526'
-      feat_eng_cols: 'ON'
-      hidden_units: 60, 10
-    trialId: '10'
-  - finalMetric:
-      objectiveValue: 0.565556
-      trainingStep: '170'
-    hyperparameters:
-      batchsize: '509'
-      dropout: '0.82899746653664441'
-      feat_eng_cols: 'OFF'
-      hidden_units: 60, 10
-    trialId: '11'
-  - finalMetric:
-      objectiveValue: 0.564926
-      trainingStep: '181'
-    hyperparameters:
-      batchsize: '477'
-      dropout: '0.8971669694545652'
-      feat_eng_cols: 'OFF'
-      hidden_units: 64,16
-    trialId: '9'
-  - finalMetric:
-      objectiveValue: 0.561909
-      trainingStep: '171'
-    hyperparameters:
-      batchsize: '507'
-      dropout: '0.89914269171598571'
-      feat_eng_cols: 'ON'
-      hidden_units: 60, 10
-    trialId: '8'
-  - finalMetric:
-      objectiveValue: 0.551634
-      trainingStep: '182'
-    hyperparameters:
-      batchsize: '475'
-      dropout: '0.50295720779971143'
-      feat_eng_cols: 'OFF'
-      hidden_units: 60, 10
-    trialId: '3'
-  - finalMetric:
-      objectiveValue: 0.548125
-      trainingStep: '190'
-    hyperparameters:
-      batchsize: '456'
-      dropout: '0.898701199331039'
-      feat_eng_cols: 'OFF'
-      hidden_units: 64,16,4
-    trialId: '5'
-  - finalMetric:
-      objectiveValue: 0.544173
-      trainingStep: '175'
-    hyperparameters:
-      batchsize: '494'
-      dropout: '0.89956406308548975'
-      feat_eng_cols: 'ON'
-      hidden_units: 64,16,4
-    trialId: '7'
-  - finalMetric:
-      objectiveValue: 0.506935
-      trainingStep: '359'
-    hyperparameters:
-      batchsize: '241'
-      dropout: '0.580563897941328'
-      feat_eng_cols: 'ON'
-      hidden_units: 64,16
-    trialId: '4'
-  - finalMetric:
-      objectiveValue: 0.466
-      trainingStep: '4317'
-    hyperparameters:
-      batchsize: '20'
-      dropout: '0.68148685405261988'
-      feat_eng_cols: 'OFF'
-      hidden_units: 60, 10
-    trialId: '15'
-  - finalMetric:
-      objectiveValue: 0.459407
-      trainingStep: '640'
-    hyperparameters:
-      batchsize: '135'
-      dropout: '0.59921092474490512'
-      feat_eng_cols: 'ON'
-      hidden_units: 64,16,4
-    trialId: '2'
-  - finalMetric:
-      objectiveValue: 0.283864
-      trainingStep: '1962'
-    hyperparameters:
-      batchsize: '44'
-      dropout: '0.20047821154201562'
-      feat_eng_cols: 'OFF'
-      hidden_units: 64,16
-    trialId: '6'
+completedTrialCount: '10'
+consumedMLUnits: 13.08
+isHyperparameterTuningJob: true
+trials:
+- finalMetric:
+    objectiveValue: 0.555806
+    trainingStep: '179'
+  hyperparameters:
+    batchsize: '484'
+    dropout: '0.27851938277724281'
+    feat_eng_cols: 'ON'
+    hidden_units: 64,16
+    learn_rate: '0.082744837373068689'
+  trialId: '9'
+- finalMetric:
+    objectiveValue: 0.539914
+    trainingStep: '214'
+  hyperparameters:
+    batchsize: '404'
+    dropout: '0.23510681204714876'
+    feat_eng_cols: 'ON'
+    hidden_units: 120, 48, 24, 12
+    learn_rate: '0.1225371157647044'
+  trialId: '8'
+- finalMetric:
+    objectiveValue: 0.536858
+    trainingStep: '269'
+  hyperparameters:
+    batchsize: '322'
+    dropout: '0.69860874444556487'
+    feat_eng_cols: 'ON'
+    hidden_units: 64,16
+    learn_rate: '0.077065497802600108'
+  trialId: '1'
+- finalMetric:
+    objectiveValue: 0.524869
+    trainingStep: '251'
+  hyperparameters:
+    batchsize: '345'
+    dropout: '0.33491285352140432'
+    feat_eng_cols: 'ON'
+    hidden_units: 120, 48, 24, 12
+    learn_rate: '0.14031212801135989'
+  trialId: '4'
+- finalMetric:
+    objectiveValue: 0.524051
+    trainingStep: '388'
+  hyperparameters:
+    batchsize: '223'
+    dropout: '0.82573739788902145'
+    feat_eng_cols: 'ON'
+    hidden_units: 64,16
+    learn_rate: '0.082803089054758042'
+  trialId: '5'
+- finalMetric:
+    objectiveValue: 0.519269
+    trainingStep: '290'
+  hyperparameters:
+    batchsize: '298'
+    dropout: '0.5609098059496993'
+    feat_eng_cols: 'ON'
+    hidden_units: 64,16
+    learn_rate: '0.069729717278394762'
+  trialId: '6'
+- finalMetric:
+    objectiveValue: 0.504663
+    trainingStep: '416'
+  hyperparameters:
+    batchsize: '208'
+    dropout: '0.34055125155247806'
+    feat_eng_cols: 'ON'
+    hidden_units: 120, 48, 24, 12
+    learn_rate: '0.16061624206382533'
+  trialId: '7'
+- finalMetric:
+    objectiveValue: 0.452621
+    trainingStep: '596'
+  hyperparameters:
+    batchsize: '145'
+    dropout: '0.86280287384756971'
+    feat_eng_cols: 'ON'
+    hidden_units: 120, 48, 24, 12
+    learn_rate: '0.14704956042580408'
+  trialId: '10'
+- finalMetric:
+    objectiveValue: 0.307978
+    trainingStep: '970'
+  hyperparameters:
+    batchsize: '89'
+    dropout: '0.676460949033334'
+    feat_eng_cols: 'OFF'
+    hidden_units: 64,16,4
+    learn_rate: '0.094045237019706823'
+  trialId: '2'
+- finalMetric:
+    objectiveValue: 0.221321
+    trainingStep: '1629'
+  hyperparameters:
+    batchsize: '53'
+    dropout: '0.59065522991373465'
+    feat_eng_cols: 'ON'
+    hidden_units: 120, 48, 24, 12
+    learn_rate: '0.067561307384850472'
+  trialId: '3'
