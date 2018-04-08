@@ -142,7 +142,7 @@ def serving_input_fn():
 
 
                      
-def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_units, feat_eng_cols, job_dir,  **kwargs):
+def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_units, feat_eng_cols, job_dir, learn_rate, dropout,  **kwargs):
     # define classifier config
     classifier_config=tf.estimator.RunConfig(save_checkpoints_steps=10)
     
@@ -150,7 +150,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
     real_feature_columns, all_feature_columns = get_features(feat_eng_cols)
 
     optimizer = tf.train.ProximalAdagradOptimizer(
-            learning_rate=float(kwargs['learn_rate']),
+            learning_rate=float(learn_rate),
             l1_regularization_strength=0.1,
             l2_regularization_strength=0.01
             )
@@ -163,7 +163,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
         label_vocabulary=class_labels,
         model_dir=job_dir,
         config=classifier_config, 
-        dnn_dropout=float(kwargs['dropout']),
+        dnn_dropout=float(dropout),
         dnn_optimizer=optimizer
         )
     
@@ -188,7 +188,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
 
     # define training, eval spec for train and evaluate including
     train_spec = tf.estimator.TrainSpec(train_input, 
-                                        max_steps=1003100
+                                        max_steps=100
                                         )
     
     exporter = tf.estimator.LatestExporter('exporter',serving_input_fn)                                    
