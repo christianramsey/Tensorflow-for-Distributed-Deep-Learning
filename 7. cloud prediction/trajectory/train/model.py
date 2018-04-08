@@ -142,7 +142,7 @@ def serving_input_fn():
 
 
                      
-def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_units, feat_eng_cols, job_dir, **kwargs):
+def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_units, feat_eng_cols, job_dir,  **kwargs):
     # define classifier config
     classifier_config=tf.estimator.RunConfig(save_checkpoints_steps=10)
     
@@ -150,7 +150,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
     real_feature_columns, all_feature_columns = get_features(feat_eng_cols)
 
     optimizer = tf.train.ProximalAdagradOptimizer(
-            learning_rate=0.01,
+            learning_rate=float(kwargs['learn_rate']),
             l1_regularization_strength=0.1,
             l2_regularization_strength=0.01
             )
