@@ -46,11 +46,11 @@ if __name__ == '__main__':
     parser.add_argument(
         '--outputdir',
         help='Output dir for training/eval',
-        required=True
-    )   
+        required=False
+    )
     parser.add_argument(
         '--hidden_units',
-        help='Output dir for training/eval',
+        help='Number of hidden units as a comma separated string',
         required=False
     )
     parser.add_argument(

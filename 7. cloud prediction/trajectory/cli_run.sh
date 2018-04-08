@@ -6,7 +6,6 @@ gcloud ml-engine jobs submit training $JOB_NAME \
         --runtime-version $RUNTIME_VERSION \
         --region $REGION \
         --config $CONFIG \
-        --verbosity debug \
         -- \
         --traindir $TRAINDIR \
         --evaldir $EVALDIR \

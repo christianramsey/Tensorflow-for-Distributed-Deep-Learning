@@ -108,12 +108,14 @@ def my_input_fn(file_paths, epochs=10, perform_shuffle=True,  batch_size=32):
         features = parsed_line  # Everything (but last element) are the features
         d = dict(zip(feature_names, features)), label
         return d
-    dataset = (tf.data.TextLineDataset(file_paths)  # Read text file
-                    .map(decode_csv))  # Transform each elem by decode_csv
+    dataset = tf.data.TextLineDataset(file_paths)  # Read text file
+    dataset = dataset.apply(tf.contrib.data.map_and_batch(map_func=decode_csv, batch_size=batch_size))        
+    
     if perform_shuffle:
-        dataset = dataset.shuffle(100)
-    dataset = dataset.batch(batch_size)
-    dataset = dataset.repeat(epochs)
+        dataset.shuffle(500, reshuffle_each_iteration=True).repeat(epochs)
+    else:
+        dataset = dataset.repeat(epochs)    
+    
     iterator = dataset.make_one_shot_iterator()
     batch_features, batch_labels = iterator.get_next()
     return batch_features, batch_labels

@@ -6,7 +6,7 @@ gcloud ml-engine local train --module-name $MAIN_TRAINER_MODULE \
     --traindir $TRAINDIR \
     --evaldir $EVALDIR \
     --bucket $BUCKET \
-    --outputdir $OUTPUTDIR \
+    --outputdir 'output' \
     --dropout 0.27851938277724281 \
     --batchsize 484 \
     --epochs 100 \
