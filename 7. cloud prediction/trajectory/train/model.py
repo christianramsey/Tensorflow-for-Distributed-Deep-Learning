@@ -1,10 +1,13 @@
 import numpy as np
 import tensorflow as tf
-from tensorflow import feature_column
-from tensorflow.python.lib.io import file_io
+from pi import file_io
 tf.logging.set_verbosity(tf.logging.INFO)
 from pprint import pprint 
 
+
+print("---------------TENSORFLOW VERSION------------")
+print(tf.__version__)
+print("---------------TENSORFLOW VERSION------------")
 # DESCRIBE DATASET
 # define columns and field defaults
 COLUMNS        = ["Lat", "Long", "Altitude","Date_",
@@ -112,7 +115,7 @@ def my_input_fn(file_paths, epochs=10, perform_shuffle=True,  batch_size=32):
     dataset = dataset.apply(tf.contrib.data.map_and_batch(map_func=decode_csv, batch_size=batch_size))        
     
     if perform_shuffle:
-        dataset.shuffle(500, reshuffle_each_iteration=True).repeat(epochs)
+        dataset.shuffle(500, reshuffle_each_iteration=False).repeat(epochs)
     else:
         dataset = dataset.repeat(epochs)    
     
