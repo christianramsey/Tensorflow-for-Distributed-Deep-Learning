@@ -1,7 +1,7 @@
 gcloud ml-engine local train --module-name $MAIN_TRAINER_MODULE \
     --job-dir 'output' \
     --verbosity debug \
-    -- 
+    -- \
     --traindir $TRAINDIR \
     --evaldir $EVALDIR \
     --bucket $BUCKET \
