@@ -1,7 +1,7 @@
 export TRAINER_PACKAGE_PATH="train"
 now=$(date +"%Y%m%d_%H%M%S")
 export JOB_NAME="trajectory_$now"
-export CONFIG="config_complex.yaml"
+export CONFIG="run_training_files/config_complex.yaml"
 export MAIN_TRAINER_MODULE="train.task"
 export JOB_DIR="gs://trajectory/predictions_test"
 export PACKAGE_STAGING_LOCATION="gs://trajectory/model"
