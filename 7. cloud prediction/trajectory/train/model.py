@@ -4,10 +4,6 @@ from tensorflow.python.lib.io import file_io
 tf.logging.set_verbosity(tf.logging.INFO)
 from pprint import pprint 
 
-
-print("---------------TENSORFLOW VERSION------------")
-print(tf.__version__)
-print("---------------TENSORFLOW VERSION------------")
 # DESCRIBE DATASET
 # define columns and field defaults
 COLUMNS        = ["Lat", "Long", "Altitude","Date_",
