@@ -114,12 +114,12 @@ def my_input_fn(file_paths, epochs, perform_shuffle=True,  batch_size=32):
         dataset.shuffle(500, reshuffle_each_iteration=False).repeat(epochs)
     else:
         dataset = dataset.repeat(epochs)   
-    iterator = dataset.make_one_shot_iterator()
-    batch_features, batch_labels = iterator.get_next()
-    features =  tf.data.Dataset.from_tensors(batch_features)
-    labels = tf.data.Dataset.from_tensors(batch_labels)
+    # iterator = dataset.make_one_shot_iterator()
+    # batch_features, batch_labels = iterator.get_next()
+    # features =  tf.data.Dataset.from_tensors(batch_features)
+    # labels = tf.data.Dataset.from_tensors(batch_labels)
     # return batch_features, batch_labels
-    return tf.data.Dataset.zip((features, labels))
+    return dataset
 
 
 # define all class labels
