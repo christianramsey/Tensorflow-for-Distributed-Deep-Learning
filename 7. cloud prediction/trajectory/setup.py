@@ -6,4 +6,4 @@ REQUIRED_PACKAGES = [
 if __name__ == '__main__':
     setup(name='train',
           packages=['train'],
-          install_requires=['tensorflow-gpu==1.7'])
+          install_requires=['tf-nightly-gpu'])

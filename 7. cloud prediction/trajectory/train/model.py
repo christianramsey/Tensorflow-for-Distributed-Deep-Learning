@@ -113,11 +113,14 @@ def my_input_fn(file_paths, epochs, perform_shuffle=True,  batch_size=32):
     if perform_shuffle:
         dataset.shuffle(500, reshuffle_each_iteration=False).repeat(epochs)
     else:
-        dataset = dataset.repeat(epochs)    
-    
+        dataset = dataset.repeat(epochs)   
     iterator = dataset.make_one_shot_iterator()
     batch_features, batch_labels = iterator.get_next()
-    return batch_features, batch_labels
+    features =  tf.data.Dataset.from_tensors(batch_features)
+    labels = tf.data.Dataset.from_tensors(batch_labels)
+    # return batch_features, batch_labels
+    return tf.data.Dataset.zip((features, labels))
+
 
 # define all class labels
 class_labels = ['bike', 'bus', 'car', 
@@ -145,7 +148,8 @@ def serving_input_fn():
                      
 def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_units, feat_eng_cols, job_dir, learn_rate, dropout,  **kwargs):
     # define classifier config
-    classifier_config=tf.estimator.RunConfig(save_checkpoints_steps=10)
+    distribution      = tf.contrib.distribute.MirroredStrategy()
+    classifier_config = tf.estimator.RunConfig(save_checkpoints_steps=10, train_distribute=distribution)
     
     hidden_units = hidden_units.split(',')
     real_feature_columns, all_feature_columns = get_features(feat_eng_cols)
@@ -182,9 +186,9 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
 
     eval_input = lambda: my_input_fn(
         evaldata,
-        batch_size=batchsize,
+        batch_size=None,
         perform_shuffle=False,
-        epochs=epochs
+        epochs=1
     )
 
     # define training, eval spec for train and evaluate including

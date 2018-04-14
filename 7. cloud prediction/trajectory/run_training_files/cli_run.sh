@@ -13,7 +13,7 @@ gcloud ml-engine jobs submit training $JOB_NAME \
         --outputdir $JOB_DIR \
         --dropout 0.27851938277724281 \
         --batchsize 32 \
-        --epochs 10000 \
+        --epochs 100 \
         --hidden_units '64,24, 12' \
         --feat_eng_cols 'ON' \
         --learn_rate 0.082744837373068689
