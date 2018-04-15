@@ -1,1 +1,1 @@
-export MODEL_BINARY="gs://trajectory/predictions2/export/exporter/1523758058/"
+export MODEL_BINARY="gs://trajectory/predictions_test/export/exporter/1523805860/"
