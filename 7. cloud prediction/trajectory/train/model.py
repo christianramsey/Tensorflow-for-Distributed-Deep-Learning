@@ -191,7 +191,7 @@ def train_eval(traindir, evaldir, batchsize, bucket, epochs, outputdir, hidden_u
 
     # define training, eval spec for train and evaluate including
     train_spec = tf.estimator.TrainSpec(train_input, 
-                                        max_steps=1000000
+                                        max_steps=1000
                                         )
     
     exporter = tf.estimator.LatestExporter('exporter',serving_input_fn)                                    
