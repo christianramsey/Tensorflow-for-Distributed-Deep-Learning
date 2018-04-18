@@ -17,7 +17,7 @@ credentials = GoogleCredentials.get_application_default()
 mlapi = discovery.build('ml', 'v1', credentials=credentials)
 
 # Create a request to call projects.models.predict.
-parent = 'projects/%s/models/%s/versions/%s' % (projectID, 'trajectory', 'v1')
+parent = 'projects/%s/models/%s/versions/%s' % (projectID, 'trajectory', 'v2')
 request = mlapi.projects().predict(
               name=parent, body=data_dictionary.requestDict).execute()
 

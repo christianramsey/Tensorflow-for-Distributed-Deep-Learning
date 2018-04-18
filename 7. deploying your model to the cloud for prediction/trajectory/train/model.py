@@ -126,7 +126,6 @@ class_labels = ['bike', 'bus', 'car',
                 'plane', 'subway', 'taxi', 
                 'train', 'walk']
 
-def serving_input_fn():
     feature_placeholders = {
         'Lat': tf.placeholder(tf.float32, [None]),
         'Long': tf.placeholder(tf.float32, [None]),
