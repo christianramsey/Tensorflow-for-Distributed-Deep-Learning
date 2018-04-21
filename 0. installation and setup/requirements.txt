@@ -1,0 +1,7 @@
+tf-nightly>=1.8.0.dev20180331
+keras
+google-cloud
+google-api-python-client
+numpy
+matplotlib
+scipy
