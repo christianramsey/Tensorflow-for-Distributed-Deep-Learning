@@ -2,7 +2,10 @@
 
 This guide will show you how to setup your computer for distributed deep learning using Nvidia CUDA 9, cuDNN 7, and TensorFlow (gpu) 1.7. It will also include TensorRT support from Nvidia. I assume you are running on Ubuntu 16.04 or greater but it should work on older versions of Ubuntu. I also assume you have at least 1 Nvidia compatible GPU on your device. 
 
-> *This was successfully ran on a 15’’ Alienware laptop with a single NVIDIA GeForce GTX 1070 OC with 8GB GDDR5.
+Part 1 - Nvidia Install
+Part 2 - Anaconda and Env.
+
+> \*This was successfully ran on a 15’’ Alienware laptop with a single NVIDIA GeForce GTX 1070 OC with 8GB GDDR5.
 
 #### Install the latest Nvidia drivers
 ##### Nvidia Display Drivers
@@ -39,7 +42,7 @@ This guide will show you how to setup your computer for distributed deep learnin
 	sudo cp -P include/cudnn.h /usr/include
 	sudo cp -P lib64/libcudnn\* /usr/lib/x86\_64-linux-gnu/
 	sudo chmod a+r /usr/lib/x86\_64-linux-gnu/libcudnn\*
-
+	
 	sudo cp -P include/cudnn.h /usr/local/cuda-9.0/include/
 	sudo cp -P lib64/libcudnn\* /usr/local/cuda-9.0/lib64/
 	sudo chmod a+r /usr/local/cuda-9.0/lib64/libcudnn\*
@@ -57,10 +60,25 @@ This guide will show you how to setup your computer for distributed deep learnin
 	sudo rm /etc/apt/apt.conf.d/50appstream
 ###### Source: [https://askubuntu.com/questions/771547/ubuntu-16-04-apt-get-update-doesnt-work-with-local-repository][5]
 
+#### Installing Anaconda
+> [Download Anaconda 5.1 Python 2.7 Here ][6]
+![][image-2]
+#### Create Custom Env using Conda
+	conda create -n tensorflow python=2.7
+	# activate your env
+	source activate tensorflow
+#### Install Requirements
+Requirements include TensorFlow GPU version, Keras, google-cloud, and supporting libs.
+
+	pip install --upgrade pip
+	pip install -r requirements.txt
+
 [1]:	http://www.linuxandubuntu.com/home/how-to-install-latest-nvidia-drivers-in-linux "How to Install Latest Nvidia Drivers in Linux"
 [2]:	%20https://launchpad.net/%5C~graphics-drivers/+archive/ubuntu/ppa "Most recent nvidia graphics driver"
 [3]:	http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#post-installation-actions "Cuda Installation Guide"
 [4]:	https://developer.nvidia.com/rdp/cudnn-download "Sign up for nvidia cudnn here"
 [5]:	https://askubuntu.com/questions/771547/ubuntu-16-04-apt-get-update-doesnt-work-with-local-repository "If apt get update doesnt work with local repo"
+[6]:	http://www.linuxandubuntu.com/home/how-to-install-latest-nvidia-drivers-in-linux "How to Install Latest Nvidia Drivers in Linux"
 
 [image-1]:	https://lh3.googleusercontent.com/3Bg9brSrCyMC8ta6sOfKZF733nGIKL6kJio9BI6bFBGBvPoLsp4uly1VzIL2umzsoMvNHg=s170 "Sign up for Nvidia cuDNN drivers"
+[image-2]:	https://lh3.googleusercontent.com/3Bg9brSrCyMC8ta6sOfKZF733nGIKL6kJio9BI6bFBGBvPoLsp4uly1VzIL2umzsoMvNHg=s170 "Sign up for Nvidia cuDNN drivers"
