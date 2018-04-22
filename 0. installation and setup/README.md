@@ -22,7 +22,7 @@ This guide will show you how to setup your computer for distributed deep learnin
 	sudo apt-mark hold nvidia-390
 ##### Most recent driver:[ https://launchpad.net/\~graphics-drivers/+archive/ubuntu/ppa][4]
 > ##### Restart  after you install Nvidia drivers
-
+`sudo shutdown -r`
 #### Install Cuda Drivers
 ##### Then start the cuda drivers and skip the display drivers install (use .sh)
 
