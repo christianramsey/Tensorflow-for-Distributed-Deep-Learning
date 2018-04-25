@@ -28,8 +28,7 @@ This guide will show you how to setup your computer for distributed deep learnin
 
 	export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
 	
-	export LD\_LIBRARY\_PATH=/usr/local/cuda-9.0/lib64\
-	                    ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+	export LD\_LIBRARY\_PATH=/usr/local/cuda-9.0/lib64
 
 ##### Verify cuda drivers
 ###### [Cuda Installation Guide][5]
