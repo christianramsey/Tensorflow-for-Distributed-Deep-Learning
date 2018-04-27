@@ -1,4 +1,4 @@
-## Setting up your Distributed Deep Learning Environment for Tensorflow 1.7+
+## Setting up your Distributed Deep Learning Environment for Tensorflow 1.8+
 
 This guide will show you how to setup your computer for distributed deep learning using Nvidia CUDA 9, cuDNN 7, and TensorFlow (gpu) 1.7. It will also include TensorRT support from Nvidia. I assume you are running on Ubuntu 16.04 or greater but it should work on older versions of Ubuntu. I also assume you have at least 1 Nvidia compatible GPU on your device. 
 
