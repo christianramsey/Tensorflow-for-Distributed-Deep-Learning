@@ -1,4 +1,4 @@
-tf-nightly-gpu>=1.8.0.dev20180331
+tensorflow>=1.8
 keras
 google-cloud
 google-api-python-client
