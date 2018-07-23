@@ -1,7 +1,7 @@
-## Distributed Deep Learning with Tensorflow and Cloud ML Engine
+## Applied Deep Learning with TensorFlow and Google Cloud AI
 You can find the final version here \> [https://github.com/dyadxmachina/Distributed-Deep-Learning-with-Tensorflow][1]
 
-#### My code for our  upcoming course with Packt Publishing titled Distributed Deep Learning which covers Input Pipelines, Feature Engineering, Distributed Training and Inference using TensorFlow and Google Cloud AI Tools.
+#### My code for our  upcoming course with Packt Publishing titled Applied Deep Learning with TensorFlow and Google Cloud AI which covers Input Pipelines, Feature Engineering, Distributed Training and Inference using TensorFlow and Google Cloud AI Tools.
 
 #### TOC and much more code commenting and clarity coming soon.
 
